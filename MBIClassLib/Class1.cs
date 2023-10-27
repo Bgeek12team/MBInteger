@@ -366,26 +366,24 @@ namespace MBIClassLib
             {
                 return 1 / (this.Pow(new MyBigInteger(power.GetValue(), "pos")));
             }
-            List<byte> order = new List<byte>();
+            Stack<bool> order = new Stack<bool>();
             while (!power.Equals(1))
             {
                 string value = power.value;
-                order.Add((byte)(int.Parse(value.Substring(value.Length - 1)) % 2));
+                order.Push(
+                    (byte.Parse(value.Substring(value.Length - 1)) % 2) == 1
+                    );
                 power = power.Divide(2);
             }
-            order.Reverse();
             MyBigInteger Base = this;
             MyBigInteger result = Base;
-            foreach (byte b in order)
+            while (!order.Count > 0)
             {
-                if (b == 1)
+                bool b = order.Pop();
+                result *= result;
+                if (b)
                 {
-                    result *= result;
                     result *= Base;
-                }
-                else
-                {
-                    result *= result;
                 }
             }
             return result;
