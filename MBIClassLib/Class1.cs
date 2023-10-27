@@ -149,19 +149,18 @@ namespace MBIClassLib
         /// <returns>Произведение текущего объекта и множителя</returns>
         private MyBigInteger Multiply(MyBigInteger second)
         {
-            int[] digits1 = new int[this.value.Length];
+            sbyte[] digits1 = new sbyte[this.value.Length];
             for (int i = 0; i < this.value.Length; i++)
             {
-                digits1[i] = Convert.ToInt32(this.value.Substring(i, 1));
+                digits1[i] = Convert.ToSByte(this.value.Substring(i, 1));
             }
-            int[] digits2 = new int[second.value.Length];
+            sbyte[] digits2 = new sbyte[second.value.Length];
             for (int i = 0; i < second.value.Length; i++)
             {
-                digits2[i] = Convert.ToInt32(second.value.Substring(i, 1));
+                digits2[i] = Convert.ToSByte(second.value.Substring(i, 1));
             }
-            MyBigInteger result = new MyBigInteger();
-            result.value = "0";
-            MyBigInteger temp = new MyBigInteger("0");
+            MyBigInteger result = new MyBigInteger("0", "pos");
+            MyBigInteger temp = new MyBigInteger("0", "pos");
             for (int i = 0; i < digits1.Length; i++)
             {
                 for (int j = 0; j < digits2.Length; j++)
@@ -366,26 +365,23 @@ namespace MBIClassLib
             {
                 return 1 / (this.Pow(new MyBigInteger(power.GetValue(), "pos")));
             }
-            List<byte> order = new List<byte>();
+            Stack<bool> order = new Stack<bool>();
             while (!power.Equals(1))
             {
                 string value = power.value;
-                order.Add((byte)(int.Parse(value.Substring(value.Length - 1)) % 2));
+                order.Push(
+                    (byte.Parse(value.Substring(value.Length - 1)) % 2) == 1
+                    );
                 power = power.Divide(2);
             }
-            order.Reverse();
             MyBigInteger Base = this;
             MyBigInteger result = Base;
-            foreach (byte b in order)
+            foreach(bool b in order)
             {
-                if (b == 1)
+                result *= result;
+                if (b)
                 {
-                    result *= result;
                     result *= Base;
-                }
-                else
-                {
-                    result *= result;
                 }
             }
             return result;
