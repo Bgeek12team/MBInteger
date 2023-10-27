@@ -149,19 +149,18 @@ namespace MBIClassLib
         /// <returns>Произведение текущего объекта и множителя</returns>
         private MyBigInteger Multiply(MyBigInteger second)
         {
-            int[] digits1 = new int[this.value.Length];
+            sbyte[] digits1 = new sbyte[this.value.Length];
             for (int i = 0; i < this.value.Length; i++)
             {
-                digits1[i] = Convert.ToInt32(this.value.Substring(i, 1));
+                digits1[i] = Convert.ToSByte(this.value.Substring(i, 1));
             }
-            int[] digits2 = new int[second.value.Length];
+            sbyte[] digits2 = new sbyte[second.value.Length];
             for (int i = 0; i < second.value.Length; i++)
             {
-                digits2[i] = Convert.ToInt32(second.value.Substring(i, 1));
+                digits2[i] = Convert.ToSByte(second.value.Substring(i, 1));
             }
-            MyBigInteger result = new MyBigInteger();
-            result.value = "0";
-            MyBigInteger temp = new MyBigInteger("0");
+            MyBigInteger result = new MyBigInteger("0", "pos");
+            MyBigInteger temp = new MyBigInteger("0", "pos");
             for (int i = 0; i < digits1.Length; i++)
             {
                 for (int j = 0; j < digits2.Length; j++)
@@ -377,9 +376,8 @@ namespace MBIClassLib
             }
             MyBigInteger Base = this;
             MyBigInteger result = Base;
-            while (!order.Count > 0)
+            foreach(bool b in order)
             {
-                bool b = order.Pop();
                 result *= result;
                 if (b)
                 {
