@@ -367,7 +367,7 @@ namespace MBIClassLib
                 return 1 / (this.Pow(new MyBigInteger(power.GetValue(), "pos")));
             }
             List<byte> order = new List<byte>();
-            while (power.Equals(1) == false)
+            while (!power.Equals(1))
             {
                 string value = power.value;
                 order.Add((byte)(int.Parse(value.Substring(value.Length - 1)) % 2));
