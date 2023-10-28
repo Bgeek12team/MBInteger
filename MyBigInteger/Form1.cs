@@ -7,7 +7,7 @@ namespace MyBigIntegerForm
     public partial class mbiForm : Form
     {
         private Stopwatch sWatch = new Stopwatch();
-        private const int standartSizeOfForm = 450;
+        private const int standartSizeOfForm = 550;
         private (int, int) sizeForm;
         private (int, int) sizeTResult;
         private (int, int) sizeGbResult;
