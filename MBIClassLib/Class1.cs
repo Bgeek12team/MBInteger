@@ -395,7 +395,7 @@ namespace MBIClassLib
         /// </param>
         /// <returns>Ближайщее целое число
         /// к подкоренному числу</returns>
-        private static MyBigInteger Sqrt(MyBigInteger n)
+        public static MyBigInteger Sqrt(MyBigInteger n)
         {
             MyBigInteger result = new MyBigInteger(0);
             MyBigInteger counter = new MyBigInteger(1);
