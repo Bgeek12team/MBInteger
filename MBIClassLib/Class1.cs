@@ -261,6 +261,38 @@ namespace MBIClassLib
         /// </summary>
         /// <param name="second">Делитель в формате MyBigInteger</param>
         /// <returns>Частное текущего числа и делителя</returns>
+        private MyBigInteger divide(MyBigInteger divider)
+        {
+            string remainder = "";
+            string result = "";
+            string test2 = value.ToString();
+            foreach (char digit in test2)
+            {
+                remainder += digit;
+                var test = new MyBigInteger(remainder);
+                int num = 0;
+
+                while (test >= divider)
+                {
+                    test = test - divider;
+                    num++;
+                    if (test >= divider && test == 0)
+                        remainder = "";
+                    else { remainder = test.value; }
+                }
+                result += num.ToString();
+            }
+            result = result.TrimStart('0');
+            var quotient = new MyBigInteger(result);
+            return quotient;
+
+        }
+        /// <summary>
+        /// Метод, позволяющий делить текущее число на
+        /// делитель в формате MyBigInteger
+        /// </summary>
+        /// <param name="second">Делитель в формате MyBigInteger</param>
+        /// <returns>Частное текущего числа и делителя</returns>
         private MyBigInteger Divide(MyBigInteger second)
         {
             if (second == 1)
@@ -462,6 +494,7 @@ namespace MBIClassLib
         {
             return this.Divide(new MyBigInteger(second));
         }
+
         /// <summary>
         /// Метод, позволяющий находить остаток от деления числа типа MyBigInteger и Long
         /// </summary>
@@ -518,7 +551,7 @@ namespace MBIClassLib
         /// <returns>Результат деления</returns>
         public static MyBigInteger operator /(MyBigInteger first, MyBigInteger Second)
         {
-            return first.Divide(Second);
+            return first.divide(Second);
         }
         /// <summary>
         /// Оператор нахождения остатка от деления двух чисел типа MyBigInteger
@@ -865,6 +898,14 @@ namespace MBIClassLib
         public static explicit operator int(MyBigInteger n)
         {
             return int.Parse(n.ToString());
+        }
+        /// <summary>
+        /// Преобразует число типа MyBigInteger в число типа int
+        /// </summary>
+        /// <param name="n">преобразуемое число</param>
+        public static explicit operator long(MyBigInteger n)
+        {
+            return long.Parse(n.ToString());
         }
         /// <summary>
         /// Метод, который проверяет является ли введенная строка нулём
