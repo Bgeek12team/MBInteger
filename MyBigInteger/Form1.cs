@@ -183,6 +183,88 @@ namespace MyBigIntegerForm
         {
 
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!(tNumFirst.Text != string.Empty && tNumSecond.Text != string.Empty))
+                MessageBox.Show("Выберите оперцию!");
+            if (lOper.Text == string.Empty)
+            {
+                MessageBox.Show("Заполните все поля!");
+                returnNormalSizeForm();
+            }
+            lExSpeed.Text = "Время выполнения операции:";
+            var n1 = new MyBigInteger(tNumFirst.Text);
+            var n2 = new MyBigInteger(tNumSecond.Text);
+            string result = "0";
+
+            switch (lOper.Text)
+            {
+                        case "+":
+                            getExcutionTime(() => {
+                                result = (n1 + n2).ToString();
+                            });
+                            break;
+                        case "-":
+                            getExcutionTime(() => {
+                                result = (n1 - n2).ToString();
+                            });
+                            break;
+                        case "<":
+                            getExcutionTime(() => {
+                                result = (n1 < n2).ToString();
+                            });
+                            break;
+                        case ">":
+                            getExcutionTime(() => {
+                                result = (n1 > n2).ToString();
+                            });
+                            break;
+                        case "≥":
+                            getExcutionTime(() => {
+                                result = (n1 >= n2).ToString();
+                            });
+                            break;
+                        case "≤":
+                            getExcutionTime(() => {
+                                result = (n1 <= n2).ToString();
+                            });
+                            break;
+                        case "^":
+                            getExcutionTime(() => {
+                                result = (n1 ^ n2).ToString();
+                            });
+                            break;
+                        case "*":
+                            getExcutionTime(() => {
+                                result = (n1 * n2).ToString();
+                            });
+                            break;
+                        case "/":
+                            getExcutionTime(() => {
+                                result = (n1 / n2).ToString();
+                            });
+                            break;
+                        case "%":
+                            getExcutionTime(() => {
+                                result = (n1 % n2).ToString();
+                            });
+                            break;
+                        case "=":
+                            getExcutionTime(() => {
+                                result = (n1 == n2).ToString();
+                            });
+                            break;
+                        case "≠":
+                            getExcutionTime(() => {
+                                result = (n1 != n2).ToString();
+                            });
+                    break;
+                default:
+                    break;
+            }
+            writeResult(result);
+            lExSpeed.Visible = true;
+        }
         private void getExcutionTime(Action act)
         {
             sWatch.Start();
@@ -219,5 +301,6 @@ namespace MyBigIntegerForm
             gBInputForm.Location = new Point(sizeGbInputForm.Item1, sizeGbInputForm.Item2);
             lExSpeed.Location = new Point(sizeLExSpeed.Item1, sizeLExSpeed.Item2);
         }
+
     }
 }

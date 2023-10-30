@@ -52,9 +52,10 @@
             this.gBInputForm = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.more = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.gBResult.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxSecNum.SuspendLayout();
@@ -328,47 +329,48 @@
             this.gBInputForm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gBInputForm.Name = "gBInputForm";
             this.gBInputForm.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gBInputForm.Size = new System.Drawing.Size(608, 352);
+            this.gBInputForm.Size = new System.Drawing.Size(545, 352);
             this.gBInputForm.TabIndex = 23;
             this.gBInputForm.TabStop = false;
             this.gBInputForm.Text = "Панель взаимодействия";
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.groupBox4);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(642, 117);
+            this.groupBox1.Location = new System.Drawing.Point(565, 117);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(326, 352);
+            this.groupBox1.Size = new System.Drawing.Size(403, 352);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Дополнительное";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.textBox2);
+            this.groupBox4.Controls.Add(this.more);
             this.groupBox4.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.groupBox4.Location = new System.Drawing.Point(23, 35);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox4.Size = new System.Drawing.Size(297, 89);
+            this.groupBox4.Size = new System.Drawing.Size(368, 89);
             this.groupBox4.TabIndex = 20;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Число";
             // 
-            // textBox2
+            // more
             // 
-            this.textBox2.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.textBox2.Location = new System.Drawing.Point(5, 29);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(286, 42);
-            this.textBox2.TabIndex = 0;
+            this.more.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.more.Location = new System.Drawing.Point(5, 29);
+            this.more.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.more.Name = "more";
+            this.more.Size = new System.Drawing.Size(357, 42);
+            this.more.TabIndex = 0;
             // 
             // label1
             // 
@@ -385,11 +387,23 @@
             this.button11.Location = new System.Drawing.Point(23, 287);
             this.button11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(286, 40);
+            this.button11.Size = new System.Drawing.Size(368, 40);
             this.button11.TabIndex = 3;
             this.button11.Text = "Факторизация";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(23, 191);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(362, 88);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Извлечь квадратный корень";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // mbiForm
             // 
@@ -445,8 +459,9 @@
         private RichTextBox tResult;
         private GroupBox groupBox1;
         private GroupBox groupBox4;
-        private TextBox textBox2;
+        private TextBox more;
         private Label label1;
         private Button button11;
+        private Button button1;
     }
 }
