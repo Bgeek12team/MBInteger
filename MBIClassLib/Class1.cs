@@ -1,4 +1,7 @@
-﻿using System.Numerics;
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Numerics;
+using System.Text;
 
 namespace MBIClassLib
 {
@@ -106,39 +109,32 @@ namespace MBIClassLib
 
             }
 
-            string result = "";
+            int buf = 10;
+            StringBuilder result = new StringBuilder("");
             string n = this.value;
             string m = second.value;
-            int t = 0;
             if (n.Length != m.Length)
             {
                 if (m.Length > n.Length)
                 {
-                    n = n.PadLeft(m.Length - n.Length + n.Length, '0');
+                    n = n.PadRight(m.Length - n.Length + n.Length, '0');
                 }
                 else
-                    m = m.PadLeft(n.Length - m.Length + m.Length, '0');
+                    m = m.PadRight(n.Length - m.Length + m.Length, '0');
             }
-            for (int i = n.Length - 1; i >= 0; i--)
+            while (n.Length % buf != 0)
             {
-
-                char firstelement = n[i];
-                char secondelement = m[i];
-                t += (int)Char.GetNumericValue(firstelement) + (int)Char.GetNumericValue(secondelement);
-                if (t > 9)
-                {
-                    result = result.Insert(0, t.ToString().Substring(1));
-                    t = 1;
-                }
-                else if (t <= 9)
-                {
-                    result = result.Insert(0, t.ToString().Substring(0));
-                    t = 0;
-                }
-                if (i == 0 && t == 1)
-                    result = result.Insert(0, "1");
+                n = "0" + n;
+                m = "0" + m;
             }
-            MyBigInteger res = new MyBigInteger(result);
+            int carry = 0;
+            for (int i = n.Length; i > 0; i -= buf)
+            {
+                int temp = int.Parse(n.Substring(i - buf, buf)) + int.Parse(m.Substring(i - buf, buf)) + carry;
+                carry = temp / buf;
+                result.Append(temp.ToString());
+            }
+            MyBigInteger res = new MyBigInteger(result.ToString());
             return res;
         }
         /// <summary>
@@ -201,8 +197,6 @@ namespace MBIClassLib
                     return new MyBigInteger(mbi.GetValue(), "neg");
                 }
             }
-            string result = "";
-            MyBigInteger res = new MyBigInteger();
 
             bool f = false;
             string n;
@@ -211,8 +205,8 @@ namespace MBIClassLib
 
             if (this > second)
             {
-                n = Reverse(TrimLeftZeros(this.value));
-                m = Reverse(TrimLeftZeros(second.value));
+                n = this.value;
+                m = second.value;
             }
             else if (this == second)
             {
@@ -221,38 +215,46 @@ namespace MBIClassLib
             else
             {
                 f = true;
-                n = Reverse(TrimLeftZeros(second.value));
-                m = Reverse(TrimLeftZeros(this.value));
+                n = second.value;
+                m = this.value;
             }
 
-            while (n.Length > m.Length)
-                m = m += '0';
-
-            int k = 0;
-
-            for (int i = 0; i < n.Length; i++)
+            int buf = 10;
+            StringBuilder result = new StringBuilder("");
+            if (f) result.Append('-');
+            if (n.Length != m.Length)
             {
-                int firstchar = (int)Char.GetNumericValue(n[i]);
-                int secondchar = (int)Char.GetNumericValue(m[i]);
-
-                int temp = firstchar - secondchar - k;
-
-                if (temp < 0)
+                if (m.Length > n.Length)
                 {
-                    temp += 10;
-                    k = 1;
+                    n = n.PadRight(m.Length - n.Length + n.Length, '0');
                 }
                 else
-                    k = 0;
-
-                result = temp.ToString() + result;
+                    m = m.PadRight(n.Length - m.Length + m.Length, '0');
             }
-            result = result.TrimStart('0');
-
-            if (f)
-                result = '-' + result;
-
-            res.value = result;
+            while (n.Length % buf != 0)
+            {
+                n = "0" + n;
+                m = "0" + m;
+            }
+            int borrow = 0;
+            int temp = 0;
+            for (int i = n.Length; i > 0; i -= buf)
+            {
+                int n1 = int.Parse(n.Substring(i - buf, buf));
+                int n2 = int.Parse(m.Substring(i - buf, buf));
+                if (n2 > n1)
+                {
+                    temp = (int)Math.Pow(10, buf) + n1 - n2;
+                    borrow = 1;
+                }
+                else
+                {
+                    temp = n1 - n2;
+                    borrow = 0;
+                }
+                result.Append(temp.ToString());
+            }
+            MyBigInteger res = new MyBigInteger(result.ToString());
             return res;
         }
         /// <summary>
