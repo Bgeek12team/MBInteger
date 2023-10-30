@@ -50,26 +50,36 @@
             this.groupBoxSecNum = new System.Windows.Forms.GroupBox();
             this.lExSpeed = new System.Windows.Forms.Label();
             this.gBInputForm = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.more = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.gBResult.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxSecNum.SuspendLayout();
             this.gBInputForm.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tNumFirst
             // 
             this.tNumFirst.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.tNumFirst.Location = new System.Drawing.Point(4, 22);
+            this.tNumFirst.Location = new System.Drawing.Point(5, 29);
+            this.tNumFirst.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tNumFirst.Name = "tNumFirst";
-            this.tNumFirst.Size = new System.Drawing.Size(206, 35);
+            this.tNumFirst.Size = new System.Drawing.Size(230, 42);
             this.tNumFirst.TabIndex = 0;
             // 
             // bDegree
             // 
             this.bDegree.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bDegree.Location = new System.Drawing.Point(232, 179);
+            this.bDegree.Location = new System.Drawing.Point(277, 239);
+            this.bDegree.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bDegree.Name = "bDegree";
-            this.bDegree.Size = new System.Drawing.Size(100, 30);
+            this.bDegree.Size = new System.Drawing.Size(114, 40);
             this.bDegree.TabIndex = 1;
             this.bDegree.Text = "x¹";
             this.bDegree.UseVisualStyleBackColor = true;
@@ -78,9 +88,10 @@
             // bRemOfDiv
             // 
             this.bRemOfDiv.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bRemOfDiv.Location = new System.Drawing.Point(338, 179);
+            this.bRemOfDiv.Location = new System.Drawing.Point(398, 239);
+            this.bRemOfDiv.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bRemOfDiv.Name = "bRemOfDiv";
-            this.bRemOfDiv.Size = new System.Drawing.Size(100, 30);
+            this.bRemOfDiv.Size = new System.Drawing.Size(114, 40);
             this.bRemOfDiv.TabIndex = 2;
             this.bRemOfDiv.Text = "mod";
             this.bRemOfDiv.UseVisualStyleBackColor = true;
@@ -89,9 +100,10 @@
             // bCompLess
             // 
             this.bCompLess.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bCompLess.Location = new System.Drawing.Point(20, 107);
+            this.bCompLess.Location = new System.Drawing.Point(23, 143);
+            this.bCompLess.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bCompLess.Name = "bCompLess";
-            this.bCompLess.Size = new System.Drawing.Size(100, 30);
+            this.bCompLess.Size = new System.Drawing.Size(114, 40);
             this.bCompLess.TabIndex = 3;
             this.bCompLess.Text = "<";
             this.bCompLess.UseVisualStyleBackColor = true;
@@ -100,9 +112,10 @@
             // bCompMore
             // 
             this.bCompMore.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bCompMore.Location = new System.Drawing.Point(126, 107);
+            this.bCompMore.Location = new System.Drawing.Point(144, 143);
+            this.bCompMore.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bCompMore.Name = "bCompMore";
-            this.bCompMore.Size = new System.Drawing.Size(100, 30);
+            this.bCompMore.Size = new System.Drawing.Size(114, 40);
             this.bCompMore.TabIndex = 5;
             this.bCompMore.Text = ">";
             this.bCompMore.UseVisualStyleBackColor = true;
@@ -111,9 +124,10 @@
             // bComptLessOrEq
             // 
             this.bComptLessOrEq.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bComptLessOrEq.Location = new System.Drawing.Point(232, 107);
+            this.bComptLessOrEq.Location = new System.Drawing.Point(277, 143);
+            this.bComptLessOrEq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bComptLessOrEq.Name = "bComptLessOrEq";
-            this.bComptLessOrEq.Size = new System.Drawing.Size(100, 30);
+            this.bComptLessOrEq.Size = new System.Drawing.Size(114, 40);
             this.bComptLessOrEq.TabIndex = 6;
             this.bComptLessOrEq.Text = "≤";
             this.bComptLessOrEq.UseVisualStyleBackColor = true;
@@ -122,9 +136,10 @@
             // bComptMoreOrEq
             // 
             this.bComptMoreOrEq.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bComptMoreOrEq.Location = new System.Drawing.Point(338, 107);
+            this.bComptMoreOrEq.Location = new System.Drawing.Point(398, 143);
+            this.bComptMoreOrEq.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bComptMoreOrEq.Name = "bComptMoreOrEq";
-            this.bComptMoreOrEq.Size = new System.Drawing.Size(100, 30);
+            this.bComptMoreOrEq.Size = new System.Drawing.Size(114, 40);
             this.bComptMoreOrEq.TabIndex = 7;
             this.bComptMoreOrEq.Text = "≥";
             this.bComptMoreOrEq.UseVisualStyleBackColor = true;
@@ -133,9 +148,10 @@
             // bAdd
             // 
             this.bAdd.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bAdd.Location = new System.Drawing.Point(20, 143);
+            this.bAdd.Location = new System.Drawing.Point(23, 191);
+            this.bAdd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bAdd.Name = "bAdd";
-            this.bAdd.Size = new System.Drawing.Size(100, 30);
+            this.bAdd.Size = new System.Drawing.Size(114, 40);
             this.bAdd.TabIndex = 10;
             this.bAdd.Text = "+";
             this.bAdd.UseVisualStyleBackColor = true;
@@ -144,9 +160,10 @@
             // bDiff
             // 
             this.bDiff.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bDiff.Location = new System.Drawing.Point(126, 143);
+            this.bDiff.Location = new System.Drawing.Point(144, 191);
+            this.bDiff.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bDiff.Name = "bDiff";
-            this.bDiff.Size = new System.Drawing.Size(100, 30);
+            this.bDiff.Size = new System.Drawing.Size(114, 40);
             this.bDiff.TabIndex = 11;
             this.bDiff.Text = "-";
             this.bDiff.UseVisualStyleBackColor = true;
@@ -155,9 +172,10 @@
             // bDivision
             // 
             this.bDivision.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bDivision.Location = new System.Drawing.Point(232, 143);
+            this.bDivision.Location = new System.Drawing.Point(277, 191);
+            this.bDivision.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bDivision.Name = "bDivision";
-            this.bDivision.Size = new System.Drawing.Size(100, 30);
+            this.bDivision.Size = new System.Drawing.Size(114, 40);
             this.bDivision.TabIndex = 12;
             this.bDivision.Text = "/";
             this.bDivision.UseVisualStyleBackColor = true;
@@ -166,9 +184,10 @@
             // bMult
             // 
             this.bMult.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bMult.Location = new System.Drawing.Point(338, 143);
+            this.bMult.Location = new System.Drawing.Point(398, 191);
+            this.bMult.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bMult.Name = "bMult";
-            this.bMult.Size = new System.Drawing.Size(100, 30);
+            this.bMult.Size = new System.Drawing.Size(114, 40);
             this.bMult.TabIndex = 13;
             this.bMult.Text = "*";
             this.bMult.UseVisualStyleBackColor = true;
@@ -177,9 +196,10 @@
             // bEquals
             // 
             this.bEquals.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bEquals.Location = new System.Drawing.Point(20, 179);
+            this.bEquals.Location = new System.Drawing.Point(23, 239);
+            this.bEquals.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bEquals.Name = "bEquals";
-            this.bEquals.Size = new System.Drawing.Size(100, 30);
+            this.bEquals.Size = new System.Drawing.Size(114, 40);
             this.bEquals.TabIndex = 14;
             this.bEquals.Text = "=";
             this.bEquals.UseVisualStyleBackColor = true;
@@ -188,9 +208,10 @@
             // bNotEqual
             // 
             this.bNotEqual.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bNotEqual.Location = new System.Drawing.Point(126, 179);
+            this.bNotEqual.Location = new System.Drawing.Point(144, 239);
+            this.bNotEqual.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bNotEqual.Name = "bNotEqual";
-            this.bNotEqual.Size = new System.Drawing.Size(100, 30);
+            this.bNotEqual.Size = new System.Drawing.Size(114, 40);
             this.bNotEqual.TabIndex = 15;
             this.bNotEqual.Text = "!=";
             this.bNotEqual.UseVisualStyleBackColor = true;
@@ -199,9 +220,10 @@
             // bGetResult
             // 
             this.bGetResult.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.bGetResult.Location = new System.Drawing.Point(20, 215);
+            this.bGetResult.Location = new System.Drawing.Point(23, 287);
+            this.bGetResult.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bGetResult.Name = "bGetResult";
-            this.bGetResult.Size = new System.Drawing.Size(206, 30);
+            this.bGetResult.Size = new System.Drawing.Size(489, 40);
             this.bGetResult.TabIndex = 16;
             this.bGetResult.Text = "Результат";
             this.bGetResult.UseVisualStyleBackColor = true;
@@ -210,36 +232,40 @@
             // tNumSecond
             // 
             this.tNumSecond.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.tNumSecond.Location = new System.Drawing.Point(4, 26);
+            this.tNumSecond.Location = new System.Drawing.Point(5, 29);
+            this.tNumSecond.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tNumSecond.Name = "tNumSecond";
-            this.tNumSecond.Size = new System.Drawing.Size(206, 35);
+            this.tNumSecond.Size = new System.Drawing.Size(224, 42);
             this.tNumSecond.TabIndex = 17;
             // 
             // lOper
             // 
             this.lOper.AutoSize = true;
             this.lOper.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lOper.Location = new System.Drawing.Point(242, 55);
+            this.lOper.Location = new System.Drawing.Point(277, 73);
             this.lOper.Name = "lOper";
-            this.lOper.Size = new System.Drawing.Size(0, 26);
+            this.lOper.Size = new System.Drawing.Size(0, 35);
             this.lOper.TabIndex = 18;
             // 
             // gBResult
             // 
             this.gBResult.Controls.Add(this.tResult);
             this.gBResult.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.gBResult.Location = new System.Drawing.Point(12, 12);
+            this.gBResult.Location = new System.Drawing.Point(14, 16);
+            this.gBResult.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gBResult.Name = "gBResult";
-            this.gBResult.Size = new System.Drawing.Size(749, 70);
+            this.gBResult.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gBResult.Size = new System.Drawing.Size(954, 93);
             this.gBResult.TabIndex = 19;
             this.gBResult.TabStop = false;
             this.gBResult.Text = "Результат вычисления";
             // 
             // tResult
             // 
-            this.tResult.Location = new System.Drawing.Point(6, 29);
+            this.tResult.Location = new System.Drawing.Point(7, 39);
+            this.tResult.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.tResult.Name = "tResult";
-            this.tResult.Size = new System.Drawing.Size(737, 35);
+            this.tResult.Size = new System.Drawing.Size(935, 45);
             this.tResult.TabIndex = 24;
             this.tResult.Text = "";
             // 
@@ -247,9 +273,11 @@
             // 
             this.groupBox2.Controls.Add(this.tNumFirst);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBox2.Location = new System.Drawing.Point(20, 26);
+            this.groupBox2.Location = new System.Drawing.Point(23, 35);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(216, 67);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Size = new System.Drawing.Size(248, 89);
             this.groupBox2.TabIndex = 20;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Первое число";
@@ -258,9 +286,11 @@
             // 
             this.groupBoxSecNum.Controls.Add(this.tNumSecond);
             this.groupBoxSecNum.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.groupBoxSecNum.Location = new System.Drawing.Point(285, 26);
+            this.groupBoxSecNum.Location = new System.Drawing.Point(277, 35);
+            this.groupBoxSecNum.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBoxSecNum.Name = "groupBoxSecNum";
-            this.groupBoxSecNum.Size = new System.Drawing.Size(216, 67);
+            this.groupBoxSecNum.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBoxSecNum.Size = new System.Drawing.Size(247, 89);
             this.groupBoxSecNum.TabIndex = 21;
             this.groupBoxSecNum.TabStop = false;
             this.groupBoxSecNum.Text = "Второе число";
@@ -269,9 +299,9 @@
             // 
             this.lExSpeed.AutoSize = true;
             this.lExSpeed.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lExSpeed.Location = new System.Drawing.Point(12, 355);
+            this.lExSpeed.Location = new System.Drawing.Point(14, 473);
             this.lExSpeed.Name = "lExSpeed";
-            this.lExSpeed.Size = new System.Drawing.Size(24, 26);
+            this.lExSpeed.Size = new System.Drawing.Size(30, 35);
             this.lExSpeed.TabIndex = 22;
             this.lExSpeed.Text = "1";
             this.lExSpeed.Visible = false;
@@ -295,21 +325,96 @@
             this.gBInputForm.Controls.Add(this.bRemOfDiv);
             this.gBInputForm.Controls.Add(this.bDegree);
             this.gBInputForm.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.gBInputForm.Location = new System.Drawing.Point(12, 88);
+            this.gBInputForm.Location = new System.Drawing.Point(14, 117);
+            this.gBInputForm.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gBInputForm.Name = "gBInputForm";
-            this.gBInputForm.Size = new System.Drawing.Size(532, 264);
+            this.gBInputForm.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.gBInputForm.Size = new System.Drawing.Size(545, 352);
             this.gBInputForm.TabIndex = 23;
             this.gBInputForm.TabStop = false;
             this.gBInputForm.Text = "Панель взаимодействия";
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.groupBox4);
+            this.groupBox1.Controls.Add(this.label1);
+            this.groupBox1.Controls.Add(this.button11);
+            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.groupBox1.Location = new System.Drawing.Point(565, 117);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(403, 352);
+            this.groupBox1.TabIndex = 24;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Дополнительное";
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.more);
+            this.groupBox4.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.groupBox4.Location = new System.Drawing.Point(23, 35);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox4.Size = new System.Drawing.Size(368, 89);
+            this.groupBox4.TabIndex = 20;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Число";
+            // 
+            // more
+            // 
+            this.more.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.more.Location = new System.Drawing.Point(5, 29);
+            this.more.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.more.Name = "more";
+            this.more.Size = new System.Drawing.Size(357, 42);
+            this.more.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(277, 74);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(0, 35);
+            this.label1.TabIndex = 18;
+            // 
+            // button11
+            // 
+            this.button11.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button11.Location = new System.Drawing.Point(23, 287);
+            this.button11.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(368, 40);
+            this.button11.TabIndex = 3;
+            this.button11.Text = "Факторизация";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button1.Location = new System.Drawing.Point(23, 191);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(362, 88);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Извлечь квадратный корень";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // mbiForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 402);
+            this.ClientSize = new System.Drawing.Size(1012, 536);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gBInputForm);
             this.Controls.Add(this.lExSpeed);
             this.Controls.Add(this.gBResult);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "mbiForm";
             this.Text = "MyBigInteger";
             this.gBResult.ResumeLayout(false);
@@ -319,6 +424,10 @@
             this.groupBoxSecNum.PerformLayout();
             this.gBInputForm.ResumeLayout(false);
             this.gBInputForm.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -348,5 +457,11 @@
         private Label lExSpeed;
         private GroupBox gBInputForm;
         private RichTextBox tResult;
+        private GroupBox groupBox1;
+        private GroupBox groupBox4;
+        private TextBox more;
+        private Label label1;
+        private Button button11;
+        private Button button1;
     }
 }
