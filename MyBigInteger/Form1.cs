@@ -177,7 +177,12 @@ namespace MyBigIntegerForm
                 } else { MessageBox.Show("Выберите оперцию!"); }
             } else { MessageBox.Show("Заполните все поля!"); }
         }
-        
+
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
         private void getExcutionTime(Action act)
         {
             sWatch.Start();
@@ -214,6 +219,5 @@ namespace MyBigIntegerForm
             gBInputForm.Location = new Point(sizeGbInputForm.Item1, sizeGbInputForm.Item2);
             lExSpeed.Location = new Point(sizeLExSpeed.Item1, sizeLExSpeed.Item2);
         }
-        
     }
 }
