@@ -26,6 +26,17 @@ namespace MBIClassLib
         /// </summary>
         /// <param name="value">Число в формате Int64, на основе которого
         /// создается экземпляр объекта</param>
+        public MyBigInteger(ulong value)
+        {
+            this.value = value.ToString();
+            this.IsNeg = value < 0;
+        }
+        /// <summary>
+        /// Конструктор класса, создающий его экземпляр на основе
+        /// числа формата Int64
+        /// </summary>
+        /// <param name="value">Число в формате Int64, на основе которого
+        /// создается экземпляр объекта</param>
         public MyBigInteger(long value)
         {
             this.value = Math.Abs(value).ToString();
@@ -109,7 +120,7 @@ namespace MBIClassLib
 
             }
 
-            int buf = 10;
+            long buf = 10;
             StringBuilder result = new StringBuilder("");
             string n = this.value;
             string m = second.value;
@@ -127,10 +138,11 @@ namespace MBIClassLib
                 n = "0" + n;
                 m = "0" + m;
             }
-            int carry = 0;
-            for (int i = n.Length; i > 0; i -= buf)
+            long carry = 0;
+            for (long i = n.Length; i > 0; i -= buf)
             {
-                int temp = int.Parse(n.Substring(i - buf, buf)) + int.Parse(m.Substring(i - buf, buf)) + carry;
+                long temp = long.Parse(n.Substring((int)(i - buf), (int)buf)) 
+                    + long.Parse(m.Substring((int)(i - buf), (int)buf)) + carry;
                 carry = temp / buf;
                 result.Append(temp.ToString());
             }
@@ -387,6 +399,16 @@ namespace MBIClassLib
             }
             return result;
         }
+        static int Bit_Width(long x)
+        {
+            int n = 0;
+            while (x > 0)
+            {
+                n++;
+                x = x / 2;
+            }
+            return n;
+        }
         /// <summary>
         /// Метод, позволяющий найти ближайщее целое число
         /// к данному подкоренному
@@ -396,17 +418,28 @@ namespace MBIClassLib
         /// </param>
         /// <returns>Ближайщее целое число
         /// к подкоренному числу</returns>
-        public static MyBigInteger Sqrt(MyBigInteger n)
+        public static MyBigInteger Sqrt(MyBigInteger x1)
         {
-            MyBigInteger result = new MyBigInteger(0);
-            MyBigInteger counter = new MyBigInteger(1);
-            while (n >= 0)
+            int width;
+            long result;
+            long x = (long)x1;
+            if (x < 5)
             {
-                n -= counter;
-                counter += 2;
-                result++;
+                result = x / 2 + x % 2;
             }
-            return result - 1;
+            else
+            {
+                width = Bit_Width(x) - 1;   /* width > 1 */
+                result = (1 << (width / 2));
+                result = result | ((width % 2) << (width / 2 - 1));
+                {
+                    long appendix = x & ~(1 << width);
+                    appendix = appendix >> (width + 3) / 2;
+                    result += appendix;
+                }
+                result = (x / result + result) / 2;
+            }
+            return new(result);
         }
         /// <summary>
         /// Находит разложение натурального числа на простые делители и их степени
@@ -457,7 +490,7 @@ namespace MBIClassLib
         /// натуральное число от n
         /// </param>
         /// <returns>Массив простых чисел на отрезке [d; n]</returns>
-        public static MyBigInteger[] AllPrimes(MyBigInteger start, MyBigInteger end)
+        private static MyBigInteger[] AllPrimes(MyBigInteger start, MyBigInteger end)
         {
             const int buffer = 100; //размер сегмента в алгоритме
             List<MyBigInteger> primesList = new List<MyBigInteger>();
@@ -488,7 +521,7 @@ namespace MBIClassLib
         /// <param name="start">Начало сегмента</param>
         /// <param name="end">Конец сегмента</param>
         /// <param name="primesList">Список простых чисел, найденных в предидущих сегментах</param>
-        public static void SieveSegment(MyBigInteger start, MyBigInteger end, List<MyBigInteger> primesList)
+        private static void SieveSegment(MyBigInteger start, MyBigInteger end, List<MyBigInteger> primesList)
         {
             MyBigInteger size = end - start + 1;
             bool[] isPrime = new bool[(int)size];
@@ -989,12 +1022,46 @@ namespace MBIClassLib
             return myBigInteger.Add(1);
         }
         /// <summary>
+        /// Оператор, позволяющий увеличить на единицу число типа MyBigInteger
+        /// </summary>
+        /// <param name="myBigInteger"></param>
+        /// <returns></returns>
+        public static MyBigInteger operator >>(MyBigInteger myBigInteger, int shift)
+        {
+            return myBigInteger * (2 ^ shift);
+        }
+        /// <summary>
+        /// Оператор, позволяющий увеличить на единицу число типа MyBigInteger
+        /// </summary>
+        /// <param name="myBigInteger"></param>
+        /// <returns></returns>
+        public static MyBigInteger operator <<(MyBigInteger myBigInteger, int shift)
+        {
+            return myBigInteger / (2 ^ shift);
+        }
+        /// <summary>
         /// Преобразует число типа MyBigInteger в число типа int
         /// </summary>
         /// <param name="n">преобразуемое число</param>
         public static explicit operator int(MyBigInteger n)
         {
             return int.Parse(n.ToString());
+        }
+        /// <summary>
+        /// Преобразует число типа MyBigInteger в число типа int
+        /// </summary>
+        /// <param name="n">преобразуемое число</param>
+        public static explicit operator long(MyBigInteger n)
+        {
+            return long.Parse(n.ToString());
+        }
+        /// <summary>
+        /// Преобразует число типа MyBigInteger в число типа int
+        /// </summary>
+        /// <param name="n">преобразуемое число</param>
+        public static explicit operator ulong(MyBigInteger n)
+        {
+            return ulong.Parse(n.ToString());
         }
         /// <summary>
         /// Метод, который проверяет является ли введенная строка нулём
