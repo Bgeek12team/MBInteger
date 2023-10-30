@@ -117,10 +117,10 @@ namespace MBIClassLib
             {
                 if (m.Length > n.Length)
                 {
-                    n = n.PadRight(m.Length - n.Length + n.Length, '0');
+                    n = n.PadLeft(m.Length - n.Length + n.Length, '0');
                 }
                 else
-                    m = m.PadRight(n.Length - m.Length + m.Length, '0');
+                    m = m.PadLeft(n.Length - m.Length + m.Length, '0');
             }
             while (n.Length % buf != 0)
             {
@@ -134,7 +134,7 @@ namespace MBIClassLib
                 carry = temp / buf;
                 result.Append(temp.ToString());
             }
-            MyBigInteger res = new MyBigInteger(result.ToString());
+            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(result.ToString()));
             return res;
         }
         /// <summary>
@@ -219,17 +219,16 @@ namespace MBIClassLib
                 m = this.value;
             }
 
-            int buf = 10;
+            int buf = 5;
             StringBuilder result = new StringBuilder("");
-            if (f) result.Append('-');
             if (n.Length != m.Length)
             {
                 if (m.Length > n.Length)
                 {
-                    n = n.PadRight(m.Length - n.Length + n.Length, '0');
+                    n = n.PadLeft(m.Length - n.Length + n.Length, '0');
                 }
                 else
-                    m = m.PadRight(n.Length - m.Length + m.Length, '0');
+                    m = m.PadLeft(n.Length - m.Length + m.Length, '0');
             }
             while (n.Length % buf != 0)
             {
@@ -254,8 +253,8 @@ namespace MBIClassLib
                 }
                 result.Append(temp.ToString());
             }
-            MyBigInteger res = new MyBigInteger(result.ToString());
-            return res;
+            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(result.ToString()));
+            if (f) return res * -1; else return res;
         }
         /// <summary>
         /// Метод, позволяющий делить текущее число на
