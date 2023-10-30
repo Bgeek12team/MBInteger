@@ -408,6 +408,135 @@ namespace MBIClassLib
             return result - 1;
         }
         /// <summary>
+        /// Находит разложение натурального числа на простые делители и их степени
+        /// </summary>
+        /// <param name="n">Проверяемое натуральное число от 2</param>
+        /// <returns>
+        /// Кортеж, состоящий из двух массивов:
+        /// массив целочисленных положительных делителей
+        /// и массив целочисленных положительных степеней соответсвующих делителей
+        /// </returns>
+        public static (MyBigInteger[], MyBigInteger[]) Factorize(MyBigInteger n)
+        {
+
+            List<MyBigInteger> dividers = new List<MyBigInteger>();
+            List<MyBigInteger> powers = new List<MyBigInteger>();
+            MyBigInteger[] primes = AllPrimes(new MyBigInteger("2"), n);
+            long i = 0;
+            int k = 0;
+            while (n > 1)
+            {
+                if (n % primes[i] == 0)
+                {
+                    dividers.Add(primes[i]);
+                    powers.Add(new MyBigInteger(0));
+                    while (n % primes[i] == 0)
+                    {
+                        powers[k]++;
+                        n /= primes[i];
+                    }
+                    k++;
+                }
+                i++;
+            }
+            return (dividers.ToArray(), powers.ToArray());
+        }
+        /// <summary>
+        /// Находит все простые числа на отрезке 
+        /// от данного натурального d 
+        /// до данного натурального n
+        /// с помощью метода сегментированного решета Аткина
+        /// </summary>
+        /// <param name="d">
+        /// Начало проверяемого отрезка,
+        /// натуральное число от 2
+        /// </param>
+        /// <param name="n">
+        /// Конец проверяемого отрезка,
+        /// натуральное число от n
+        /// </param>
+        /// <returns>Массив простых чисел на отрезке [d; n]</returns>
+        public static MyBigInteger[] AllPrimes(MyBigInteger start, MyBigInteger end)
+        {
+            const int buffer = 100; //размер сегмента в алгоритме
+            List<MyBigInteger> primesList = new List<MyBigInteger>();
+            if (start <= 2)
+            {
+                primesList.Add(new MyBigInteger(2));
+                primesList.Add(new MyBigInteger(3));
+            }
+            else if (start == 3)
+            {
+                primesList.Add(new MyBigInteger(3));
+            }
+            MyBigInteger startSegment = start;
+            MyBigInteger endSegment = start + buffer;
+            while (endSegment < end + buffer)
+            {
+                SieveSegment(startSegment, MyBigInteger.Min(endSegment, end), primesList);
+                startSegment = endSegment + 1;
+                endSegment += buffer;
+            }
+
+            return primesList.ToArray();
+        }
+
+        /// <summary>
+        /// Обработка сегмента заданного размера в алгоритме решета Аткина
+        /// </summary>
+        /// <param name="start">Начало сегмента</param>
+        /// <param name="end">Конец сегмента</param>
+        /// <param name="primesList">Список простых чисел, найденных в предидущих сегментах</param>
+        public static void SieveSegment(MyBigInteger start, MyBigInteger end, List<MyBigInteger> primesList)
+        {
+            MyBigInteger size = end - start + 1;
+            bool[] isPrime = new bool[(int)size];
+            MyBigInteger sqrt = MyBigInteger.Sqrt(end);
+
+            for (MyBigInteger x = new MyBigInteger(1); x <= sqrt; x++)
+            {
+                for (MyBigInteger y = new MyBigInteger(1); y <= sqrt; y++)
+                {
+                    MyBigInteger n = (4 * x * x) + (y * y);
+                    if (n >= start && n <= end && (n % 12 == 1 || n % 12 == 5))
+                    {
+                        isPrime[(int)(n - start)] = !isPrime[(int)(n - start)];
+                    }
+
+                    n = (3 * x * x) + (y * y);
+                    if (n >= start && n <= end && n % 12 == 7)
+                    {
+                        isPrime[(int)(n - start)] = !isPrime[(int)(n - start)];
+                    }
+
+                    n = (3 * x * x) - (y * y);
+                    if (x > y && n >= start && n <= end && n % 12 == 11)
+                    {
+                        isPrime[(int)(n - start)] = !isPrime[(int)(n - start)];
+                    }
+                }
+            }
+            for (MyBigInteger n = start + 2; n <= sqrt; n++)
+            {
+                if (isPrime[(int)(n - start)])
+                {
+                    MyBigInteger x = n * n;
+                    for (MyBigInteger i = x; i <= end; i += x)
+                    {
+                        isPrime[(int)(i - start)] = false;
+                    }
+                }
+            }
+
+            for (MyBigInteger i = start; i <= end; i++)
+            {
+                if (isPrime[(int)(i - start)])
+                {
+                    primesList.Add(i);
+                }
+            }
+        }
+        /// <summary>
         /// Метод, позволяющий найти минимальное из двух данных чисел
         /// в формате MyBigInteger
         /// </summary>
@@ -952,7 +1081,7 @@ namespace MBIClassLib
         /// <param name="num">преобразуемое число</param>
         /// <returns>возвращает преобразованное в строку число </returns>
         /// <exception cref="ArgumentException"></exception>
-        private static MyBigInteger Parse(string num)
+        public static MyBigInteger Parse(string num)
         {
             string trimmed = num.Trim();
             if (trimmed.Length == 0)
