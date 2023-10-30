@@ -181,87 +181,43 @@ namespace MyBigIntegerForm
 
         private void button11_Click(object sender, EventArgs e)
         {
-
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (!(tNumFirst.Text != string.Empty && tNumSecond.Text != string.Empty))
-                MessageBox.Show("Выберите оперцию!");
-            if (lOper.Text == string.Empty)
+            if (more.Text == string.Empty)
             {
                 MessageBox.Show("Заполните все поля!");
                 returnNormalSizeForm();
             }
             lExSpeed.Text = "Время выполнения операции:";
-            var n1 = new MyBigInteger(tNumFirst.Text);
-            var n2 = new MyBigInteger(tNumSecond.Text);
-            string result = "0";
-
-            switch (lOper.Text)
+            var n1 = new MyBigInteger(more.Text);
+            string result = "";
+            getExcutionTime(() =>
             {
-                        case "+":
-                            getExcutionTime(() => {
-                                result = (n1 + n2).ToString();
-                            });
-                            break;
-                        case "-":
-                            getExcutionTime(() => {
-                                result = (n1 - n2).ToString();
-                            });
-                            break;
-                        case "<":
-                            getExcutionTime(() => {
-                                result = (n1 < n2).ToString();
-                            });
-                            break;
-                        case ">":
-                            getExcutionTime(() => {
-                                result = (n1 > n2).ToString();
-                            });
-                            break;
-                        case "≥":
-                            getExcutionTime(() => {
-                                result = (n1 >= n2).ToString();
-                            });
-                            break;
-                        case "≤":
-                            getExcutionTime(() => {
-                                result = (n1 <= n2).ToString();
-                            });
-                            break;
-                        case "^":
-                            getExcutionTime(() => {
-                                result = (n1 ^ n2).ToString();
-                            });
-                            break;
-                        case "*":
-                            getExcutionTime(() => {
-                                result = (n1 * n2).ToString();
-                            });
-                            break;
-                        case "/":
-                            getExcutionTime(() => {
-                                result = (n1 / n2).ToString();
-                            });
-                            break;
-                        case "%":
-                            getExcutionTime(() => {
-                                result = (n1 % n2).ToString();
-                            });
-                            break;
-                        case "=":
-                            getExcutionTime(() => {
-                                result = (n1 == n2).ToString();
-                            });
-                            break;
-                        case "≠":
-                            getExcutionTime(() => {
-                                result = (n1 != n2).ToString();
-                            });
-                    break;
-                default:
-                    break;
+                (MyBigInteger[] dividers, MyBigInteger[] powers) = MyBigInteger.Factorize(n1);
+                for (int i = 0; i < dividers.Length; i++)
+                {
+                    result += dividers[i].ToString();
+                    if (powers[i] > 1)
+                        result += "^" + powers[i].ToString();
+                    if (i < dividers.Length - 1)
+                        result += " * ";
+                }
+            });
+            writeResult(result);
+            lExSpeed.Visible = true;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (more.Text == string.Empty)
+            {
+                MessageBox.Show("Заполните все поля!");
+                returnNormalSizeForm();
             }
+            lExSpeed.Text = "Время выполнения операции:";
+            var n1 = new MyBigInteger(more.Text);
+            string result = "0";
+            getExcutionTime(() =>
+                { 
+                    result = MyBigInteger.Sqrt(n1).ToString(); 
+                });
             writeResult(result);
             lExSpeed.Visible = true;
         }

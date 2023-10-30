@@ -1,4 +1,7 @@
-﻿using System.Numerics;
+﻿using System.Diagnostics;
+using System.Linq;
+using System.Numerics;
+using System.Text;
 
 namespace MBIClassLib
 {
@@ -106,10 +109,10 @@ namespace MBIClassLib
 
             }
 
-            string result = "";
+            int buf = 10;
+            StringBuilder result = new StringBuilder("");
             string n = this.value;
             string m = second.value;
-            int t = 0;
             if (n.Length != m.Length)
             {
                 if (m.Length > n.Length)
@@ -119,26 +122,19 @@ namespace MBIClassLib
                 else
                     m = m.PadLeft(n.Length - m.Length + m.Length, '0');
             }
-            for (int i = n.Length - 1; i >= 0; i--)
+            while (n.Length % buf != 0)
             {
-
-                char firstelement = n[i];
-                char secondelement = m[i];
-                t += (int)Char.GetNumericValue(firstelement) + (int)Char.GetNumericValue(secondelement);
-                if (t > 9)
-                {
-                    result = result.Insert(0, t.ToString().Substring(1));
-                    t = 1;
-                }
-                else if (t <= 9)
-                {
-                    result = result.Insert(0, t.ToString().Substring(0));
-                    t = 0;
-                }
-                if (i == 0 && t == 1)
-                    result = result.Insert(0, "1");
+                n = "0" + n;
+                m = "0" + m;
             }
-            MyBigInteger res = new MyBigInteger(result);
+            int carry = 0;
+            for (int i = n.Length; i > 0; i -= buf)
+            {
+                int temp = int.Parse(n.Substring(i - buf, buf)) + int.Parse(m.Substring(i - buf, buf)) + carry;
+                carry = temp / buf;
+                result.Append(temp.ToString());
+            }
+            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(result.ToString()));
             return res;
         }
         /// <summary>
@@ -201,8 +197,6 @@ namespace MBIClassLib
                     return new MyBigInteger(mbi.GetValue(), "neg");
                 }
             }
-            string result = "";
-            MyBigInteger res = new MyBigInteger();
 
             bool f = false;
             string n;
@@ -211,8 +205,8 @@ namespace MBIClassLib
 
             if (this > second)
             {
-                n = Reverse(TrimLeftZeros(this.value));
-                m = Reverse(TrimLeftZeros(second.value));
+                n = this.value;
+                m = second.value;
             }
             else if (this == second)
             {
@@ -221,39 +215,46 @@ namespace MBIClassLib
             else
             {
                 f = true;
-                n = Reverse(TrimLeftZeros(second.value));
-                m = Reverse(TrimLeftZeros(this.value));
+                n = second.value;
+                m = this.value;
             }
 
-            while (n.Length > m.Length)
-                m = m += '0';
-
-            int k = 0;
-
-            for (int i = 0; i < n.Length; i++)
+            int buf = 5;
+            StringBuilder result = new StringBuilder("");
+            if (n.Length != m.Length)
             {
-                int firstchar = (int)Char.GetNumericValue(n[i]);
-                int secondchar = (int)Char.GetNumericValue(m[i]);
-
-                int temp = firstchar - secondchar - k;
-
-                if (temp < 0)
+                if (m.Length > n.Length)
                 {
-                    temp += 10;
-                    k = 1;
+                    n = n.PadLeft(m.Length - n.Length + n.Length, '0');
                 }
                 else
-                    k = 0;
-
-                result = temp.ToString() + result;
+                    m = m.PadLeft(n.Length - m.Length + m.Length, '0');
             }
-            result = result.TrimStart('0');
-
-            if (f)
-                result = '-' + result;
-
-            res.value = result;
-            return res;
+            while (n.Length % buf != 0)
+            {
+                n = "0" + n;
+                m = "0" + m;
+            }
+            int borrow = 0;
+            int temp = 0;
+            for (int i = n.Length; i > 0; i -= buf)
+            {
+                int n1 = int.Parse(n.Substring(i - buf, buf));
+                int n2 = int.Parse(m.Substring(i - buf, buf));
+                if (n2 > n1)
+                {
+                    temp = (int)Math.Pow(10, buf) + n1 - n2;
+                    borrow = 1;
+                }
+                else
+                {
+                    temp = n1 - n2;
+                    borrow = 0;
+                }
+                result.Append(temp.ToString());
+            }
+            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(result.ToString()));
+            if (f) return res * -1; else return res;
         }
         /// <summary>
         /// Метод, позволяющий делить текущее число на
@@ -395,7 +396,7 @@ namespace MBIClassLib
         /// </param>
         /// <returns>Ближайщее целое число
         /// к подкоренному числу</returns>
-        private static MyBigInteger Sqrt(MyBigInteger n)
+        public static MyBigInteger Sqrt(MyBigInteger n)
         {
             MyBigInteger result = new MyBigInteger(0);
             MyBigInteger counter = new MyBigInteger(1);
@@ -406,6 +407,135 @@ namespace MBIClassLib
                 result++;
             }
             return result - 1;
+        }
+        /// <summary>
+        /// Находит разложение натурального числа на простые делители и их степени
+        /// </summary>
+        /// <param name="n">Проверяемое натуральное число от 2</param>
+        /// <returns>
+        /// Кортеж, состоящий из двух массивов:
+        /// массив целочисленных положительных делителей
+        /// и массив целочисленных положительных степеней соответсвующих делителей
+        /// </returns>
+        public static (MyBigInteger[], MyBigInteger[]) Factorize(MyBigInteger n)
+        {
+
+            List<MyBigInteger> dividers = new List<MyBigInteger>();
+            List<MyBigInteger> powers = new List<MyBigInteger>();
+            MyBigInteger[] primes = AllPrimes(new MyBigInteger("2"), n);
+            long i = 0;
+            int k = 0;
+            while (n > 1)
+            {
+                if (n % primes[i] == 0)
+                {
+                    dividers.Add(primes[i]);
+                    powers.Add(new MyBigInteger(0));
+                    while (n % primes[i] == 0)
+                    {
+                        powers[k]++;
+                        n /= primes[i];
+                    }
+                    k++;
+                }
+                i++;
+            }
+            return (dividers.ToArray(), powers.ToArray());
+        }
+        /// <summary>
+        /// Находит все простые числа на отрезке 
+        /// от данного натурального d 
+        /// до данного натурального n
+        /// с помощью метода сегментированного решета Аткина
+        /// </summary>
+        /// <param name="d">
+        /// Начало проверяемого отрезка,
+        /// натуральное число от 2
+        /// </param>
+        /// <param name="n">
+        /// Конец проверяемого отрезка,
+        /// натуральное число от n
+        /// </param>
+        /// <returns>Массив простых чисел на отрезке [d; n]</returns>
+        public static MyBigInteger[] AllPrimes(MyBigInteger start, MyBigInteger end)
+        {
+            const int buffer = 100; //размер сегмента в алгоритме
+            List<MyBigInteger> primesList = new List<MyBigInteger>();
+            if (start <= 2)
+            {
+                primesList.Add(new MyBigInteger(2));
+                primesList.Add(new MyBigInteger(3));
+            }
+            else if (start == 3)
+            {
+                primesList.Add(new MyBigInteger(3));
+            }
+            MyBigInteger startSegment = start;
+            MyBigInteger endSegment = start + buffer;
+            while (endSegment < end + buffer)
+            {
+                SieveSegment(startSegment, MyBigInteger.Min(endSegment, end), primesList);
+                startSegment = endSegment + 1;
+                endSegment += buffer;
+            }
+
+            return primesList.ToArray();
+        }
+
+        /// <summary>
+        /// Обработка сегмента заданного размера в алгоритме решета Аткина
+        /// </summary>
+        /// <param name="start">Начало сегмента</param>
+        /// <param name="end">Конец сегмента</param>
+        /// <param name="primesList">Список простых чисел, найденных в предидущих сегментах</param>
+        public static void SieveSegment(MyBigInteger start, MyBigInteger end, List<MyBigInteger> primesList)
+        {
+            MyBigInteger size = end - start + 1;
+            bool[] isPrime = new bool[(int)size];
+            MyBigInteger sqrt = MyBigInteger.Sqrt(end);
+
+            for (MyBigInteger x = new MyBigInteger(1); x <= sqrt; x++)
+            {
+                for (MyBigInteger y = new MyBigInteger(1); y <= sqrt; y++)
+                {
+                    MyBigInteger n = (4 * x * x) + (y * y);
+                    if (n >= start && n <= end && (n % 12 == 1 || n % 12 == 5))
+                    {
+                        isPrime[(int)(n - start)] = !isPrime[(int)(n - start)];
+                    }
+
+                    n = (3 * x * x) + (y * y);
+                    if (n >= start && n <= end && n % 12 == 7)
+                    {
+                        isPrime[(int)(n - start)] = !isPrime[(int)(n - start)];
+                    }
+
+                    n = (3 * x * x) - (y * y);
+                    if (x > y && n >= start && n <= end && n % 12 == 11)
+                    {
+                        isPrime[(int)(n - start)] = !isPrime[(int)(n - start)];
+                    }
+                }
+            }
+            for (MyBigInteger n = start + 2; n <= sqrt; n++)
+            {
+                if (isPrime[(int)(n - start)])
+                {
+                    MyBigInteger x = n * n;
+                    for (MyBigInteger i = x; i <= end; i += x)
+                    {
+                        isPrime[(int)(i - start)] = false;
+                    }
+                }
+            }
+
+            for (MyBigInteger i = start; i <= end; i++)
+            {
+                if (isPrime[(int)(i - start)])
+                {
+                    primesList.Add(i);
+                }
+            }
         }
         /// <summary>
         /// Метод, позволяющий найти минимальное из двух данных чисел
@@ -952,7 +1082,7 @@ namespace MBIClassLib
         /// <param name="num">преобразуемое число</param>
         /// <returns>возвращает преобразованное в строку число </returns>
         /// <exception cref="ArgumentException"></exception>
-        private static MyBigInteger Parse(string num)
+        public static MyBigInteger Parse(string num)
         {
             string trimmed = num.Trim();
             if (trimmed.Length == 0)
