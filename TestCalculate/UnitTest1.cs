@@ -176,7 +176,7 @@ namespace TestCalculate
             MyBigInteger second = new MyBigInteger("7472742373");
 
             MyBigInteger result = new MyBigInteger("10991816630392");
-            Assert.AreEqual((first * second).ToString(), result.ToString());
+            Assert.AreEqual((first / second).ToString(), result.ToString());
         }
         /// <summary>
         /// “ест метод сравнивающий два одинаковых числа
@@ -263,6 +263,34 @@ namespace TestCalculate
             Assert.AreEqual(first ^ second, result);
         }
         /// <summary>
+        /// “ест метод возвод€щий 2 в степень 1000
+        /// /// </summary>
+        [TestMethod]
+        public void ExponentiationWithBigValues()
+        {
+            MyBigInteger first = new MyBigInteger("2");
+            MyBigInteger second = new MyBigInteger("1000");
+
+            MyBigInteger result = new MyBigInteger("1071508607186267320948425049060001" +
+                "810561404811705533607443750388370351051124936122493198378815695858127594" +
+                "6729175531468251871452856923140435984577574698574803934567774824230985421074605062" +
+                "371141877954182153046474983581941267398767559165543946077062914571196477686542167660429" +
+                "831652624386837205668069376");
+            Assert.AreEqual(first ^ second, result);
+        }
+        /// <summary>
+        /// “ест метод возвод€щий 2 в отрицательную степень
+        /// /// </summary>
+        [TestMethod]
+        public void ExponentiationWithNegative()
+        {
+            MyBigInteger first = new MyBigInteger("2");
+            MyBigInteger second = new MyBigInteger("-1000");
+
+            MyBigInteger result = new MyBigInteger("0");
+            Assert.AreEqual(first ^ second, result);
+        }
+        /// <summary>
         /// “ест метод остаток от делени€
         /// /// </summary>
         [TestMethod]
@@ -288,7 +316,7 @@ namespace TestCalculate
             Assert.AreEqual(first % second, result);
         }
         /// <summary>
-        /// “ест метод вычисл€ющий корень из числа
+        /// “ест метод вычисл€ющий корень 1
         /// /// </summary>
         [TestMethod]
         public void SqrtByOn()
@@ -298,7 +326,43 @@ namespace TestCalculate
             MyBigInteger result = new MyBigInteger("1");
             Assert.AreEqual(MyBigInteger.Sqrt(first), result);
         }
+        /// <summary>
+        /// “ест метод вычисл€ющий корень из числа
+        /// /// </summary>
+        [TestMethod]
+        public void SqrtTest()
+        {
+            MyBigInteger first = new MyBigInteger("324");
 
+            MyBigInteger result = new MyBigInteger("18");
+            Assert.AreEqual(MyBigInteger.Sqrt(first), result);
+        }
+        /// <summary>
+        /// “ест метод вычисл€ющий корень из длинного числа
+        /// /// </summary>
+        [TestMethod]
+        public void SqrtBigValues()
+        {
+            MyBigInteger first = new MyBigInteger("879319193186727381");
 
+            MyBigInteger result = new MyBigInteger("969313521");
+            Assert.AreEqual(MyBigInteger.Sqrt(first), result);
+        }
+        /// <summary>
+        /// “ест метод провер€ющий факторизацию
+        /// /// </summary>
+        [TestMethod]
+        public void Factorize()
+        {
+            MyBigInteger first = new MyBigInteger("515");
+
+            (MyBigInteger[], MyBigInteger[]) result = ( new MyBigInteger[] { new MyBigInteger(5), new MyBigInteger(103) }, new MyBigInteger[] { new MyBigInteger(1), new MyBigInteger(1) });
+
+            Assert.AreEqual(MyBigInteger.Factorize(first).Item1[0], result.Item1[0]);
+            Assert.AreEqual(MyBigInteger.Factorize(first).Item1[1], result.Item1[1]);
+
+            Assert.AreEqual(MyBigInteger.Factorize(first).Item2[0], result.Item2[0]);
+            Assert.AreEqual(MyBigInteger.Factorize(first).Item2[1], result.Item2[1]);
+        }
     }
 }

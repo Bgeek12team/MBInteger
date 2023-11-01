@@ -177,6 +177,8 @@ namespace MBIClassLib
         /// <returns>Произведение текущего объекта и множителя</returns>
         private MyBigInteger Multiply(MyBigInteger second)
         {
+            if (second == 0 || this == 0)
+                return new(0);
             sbyte[] digits1 = new sbyte[this.value.Length];
             for (int i = 0; i < this.value.Length; i++)
             {
