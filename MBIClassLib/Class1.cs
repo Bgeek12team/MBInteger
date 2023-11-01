@@ -5,9 +5,16 @@ using System.Text;
 
 namespace MBIClassLib
 {
-
+    /// <summary>
+    /// Класс с расширениями для базовых типов
+    /// </summary>
     public static class SBEXT
     {
+        /// <summary>
+        /// Расширение, создающее функцию, добавляющую строку
+        /// в начало StringBuilder
+        /// </summary>
+        /// <param name="s">Вставляемая строка</param>
         public static void Prepend(this StringBuilder sb, string s)
         {
             sb.Insert(0, s);
