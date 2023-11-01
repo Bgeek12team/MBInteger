@@ -154,6 +154,10 @@ namespace MBIClassLib
                 string append = temp.ToString().PadLeft(buf, '0');
                 result.Prepend(append.Substring(append.Length - buf, buf));
             }
+            if ((carry == 1) && (MyBigInteger.TrimLeftZeros(result.ToString())) == "")
+            {
+                result.Prepend("1");
+            }
             MyBigInteger res = new MyBigInteger(result.ToString());
             return res;
         }
