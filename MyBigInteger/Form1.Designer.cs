@@ -377,11 +377,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(886, 402);
             this.Controls.Add(this.gBAddition);
             this.Controls.Add(this.gBInputForm);
             this.Controls.Add(this.lExSpeed);
             this.Controls.Add(this.gBResult);
+            this.ForeColor = System.Drawing.Color.Black;
             this.Name = "mbiForm";
             this.Text = "MyBigInteger";
             this.gBResult.ResumeLayout(false);

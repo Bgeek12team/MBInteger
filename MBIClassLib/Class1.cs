@@ -263,14 +263,22 @@ namespace MBIClassLib
         /// <returns>Частное текущего числа и делителя</returns>
         private MyBigInteger divide(MyBigInteger divider)
         {
+            bool isNegative = false;
             string remainder = "";
             string result = "";
+            if (divider.IsNeg == true && IsNeg == true)
+                isNegative = false;
+            else if (divider.IsNeg == true)
+                isNegative = true;
+            else if (IsNeg == true)
+                isNegative = true;
+
             foreach (char digit in value.ToString())
             {
                 remainder += digit;
                 var MBIremainder = new MyBigInteger(remainder);
                 int num = 0;
-
+                divider.IsNeg = false;
                 while (MBIremainder >= divider)
                 {
                     MBIremainder = MBIremainder - divider;
@@ -283,8 +291,8 @@ namespace MBIClassLib
             }
             result = result.TrimStart('0');
             var quotient = new MyBigInteger(result);
+            quotient.IsNeg = isNegative;
             return quotient;
-
         }
         /// <summary>
         /// Метод, позволяющий взять остаток от деления 
