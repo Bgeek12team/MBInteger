@@ -13,6 +13,7 @@ namespace MyBigIntegerForm
         private (int, int) sizeGbResult;
         private (int, int) sizeGbInputForm;
         private (int, int) sizeLExSpeed;
+        private (int, int) sizeGbAddition;
         public mbiForm()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace MyBigIntegerForm
             sizeGbResult = new(gBResult.Width, gBResult.Height);
             sizeGbInputForm = new(gBInputForm.Location.X, gBInputForm.Location.Y);
             sizeLExSpeed = new(lExSpeed.Location.X, lExSpeed.Location.Y);
+            sizeGbAddition = new(gbAddition.Location.X, gbAddition.Location.Y);
         }
 
         private void compLess_Click(object sender, EventArgs e)
@@ -274,6 +276,7 @@ namespace MyBigIntegerForm
            gBResult.Size = new Size(gBResult.Width, gBResult.Height + 35 * scaleLevel);
            gBInputForm.Location = new Point(gBInputForm.Location.X, gBInputForm.Location.Y + 35 * scaleLevel);
            lExSpeed.Location = new Point(lExSpeed.Location.X, lExSpeed.Location.Y + 35 * scaleLevel);
+           gbAddition.Location = new Point(gbAddition.Location.X, gbAddition.Location.Y + 35 * scaleLevel);
         }
         private void returnNormalSizeForm()
         {
@@ -282,6 +285,7 @@ namespace MyBigIntegerForm
             gBResult.Size = new Size(sizeGbResult.Item1, sizeGbResult.Item2);
             gBInputForm.Location = new Point(sizeGbInputForm.Item1, sizeGbInputForm.Item2);
             lExSpeed.Location = new Point(sizeLExSpeed.Item1, sizeLExSpeed.Item2);
+            gbAddition.Location = new Point(sizeGbAddition.Item1, sizeGbAddition.Item2);
         }
 
         private void gBInputForm_Enter(object sender, EventArgs e)
