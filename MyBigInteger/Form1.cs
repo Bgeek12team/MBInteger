@@ -7,12 +7,13 @@ namespace MyBigIntegerForm
     public partial class mbiForm : Form
     {
         private Stopwatch sWatch = new Stopwatch();
-        private const int standartSizeOfForm = 550;
+        private const int standartSizeOfForm = 450;
         private (int, int) sizeForm;
         private (int, int) sizeTResult;
         private (int, int) sizeGbResult;
         private (int, int) sizeGbInputForm;
         private (int, int) sizeLExSpeed;
+        private (int, int) sizeGBAddition;
         public mbiForm()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace MyBigIntegerForm
             sizeGbResult = new(gBResult.Width, gBResult.Height);
             sizeGbInputForm = new(gBInputForm.Location.X, gBInputForm.Location.Y);
             sizeLExSpeed = new(lExSpeed.Location.X, lExSpeed.Location.Y);
+            sizeGBAddition = new(gBAddition.Location.X, gBAddition.Location.Y);
         }
 
         private void compLess_Click(object sender, EventArgs e)
@@ -183,88 +185,6 @@ namespace MyBigIntegerForm
         {
 
         }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (!(tNumFirst.Text != string.Empty && tNumSecond.Text != string.Empty))
-                MessageBox.Show("Выберите оперцию!");
-            if (lOper.Text == string.Empty)
-            {
-                MessageBox.Show("Заполните все поля!");
-                returnNormalSizeForm();
-            }
-            lExSpeed.Text = "Время выполнения операции:";
-            var n1 = new MyBigInteger(tNumFirst.Text);
-            var n2 = new MyBigInteger(tNumSecond.Text);
-            string result = "0";
-
-            switch (lOper.Text)
-            {
-                        case "+":
-                            getExcutionTime(() => {
-                                result = (n1 + n2).ToString();
-                            });
-                            break;
-                        case "-":
-                            getExcutionTime(() => {
-                                result = (n1 - n2).ToString();
-                            });
-                            break;
-                        case "<":
-                            getExcutionTime(() => {
-                                result = (n1 < n2).ToString();
-                            });
-                            break;
-                        case ">":
-                            getExcutionTime(() => {
-                                result = (n1 > n2).ToString();
-                            });
-                            break;
-                        case "≥":
-                            getExcutionTime(() => {
-                                result = (n1 >= n2).ToString();
-                            });
-                            break;
-                        case "≤":
-                            getExcutionTime(() => {
-                                result = (n1 <= n2).ToString();
-                            });
-                            break;
-                        case "^":
-                            getExcutionTime(() => {
-                                result = (n1 ^ n2).ToString();
-                            });
-                            break;
-                        case "*":
-                            getExcutionTime(() => {
-                                result = (n1 * n2).ToString();
-                            });
-                            break;
-                        case "/":
-                            getExcutionTime(() => {
-                                result = (n1 / n2).ToString();
-                            });
-                            break;
-                        case "%":
-                            getExcutionTime(() => {
-                                result = (n1 % n2).ToString();
-                            });
-                            break;
-                        case "=":
-                            getExcutionTime(() => {
-                                result = (n1 == n2).ToString();
-                            });
-                            break;
-                        case "≠":
-                            getExcutionTime(() => {
-                                result = (n1 != n2).ToString();
-                            });
-                    break;
-                default:
-                    break;
-            }
-            writeResult(result);
-            lExSpeed.Visible = true;
-        }
         private void getExcutionTime(Action act)
         {
             sWatch.Start();
@@ -292,6 +212,7 @@ namespace MyBigIntegerForm
            gBResult.Size = new Size(gBResult.Width, gBResult.Height + 35 * scaleLevel);
            gBInputForm.Location = new Point(gBInputForm.Location.X, gBInputForm.Location.Y + 35 * scaleLevel);
            lExSpeed.Location = new Point(lExSpeed.Location.X, lExSpeed.Location.Y + 35 * scaleLevel);
+           gBAddition.Location = new Point(gBAddition.Location.X, gBAddition.Location.Y + 35 * scaleLevel);
         }
         private void returnNormalSizeForm()
         {
@@ -300,6 +221,7 @@ namespace MyBigIntegerForm
             gBResult.Size = new Size(sizeGbResult.Item1, sizeGbResult.Item2);
             gBInputForm.Location = new Point(sizeGbInputForm.Item1, sizeGbInputForm.Item2);
             lExSpeed.Location = new Point(sizeLExSpeed.Item1, sizeLExSpeed.Item2);
+            gBAddition.Location = new Point(sizeGBAddition.Item1, sizeGBAddition.Item2);
         }
 
     }

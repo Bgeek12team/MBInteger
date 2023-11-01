@@ -50,7 +50,7 @@
             this.groupBoxSecNum = new System.Windows.Forms.GroupBox();
             this.lExSpeed = new System.Windows.Forms.Label();
             this.gBInputForm = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gBAddition = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.more = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBoxSecNum.SuspendLayout();
             this.gBInputForm.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.gBAddition.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -310,19 +310,19 @@
             this.gBInputForm.TabStop = false;
             this.gBInputForm.Text = "Панель взаимодействия";
             // 
-            // groupBox1
+            // gBAddition
             // 
-            this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Controls.Add(this.groupBox4);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.button11);
-            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.groupBox1.Location = new System.Drawing.Point(494, 88);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(353, 264);
-            this.groupBox1.TabIndex = 24;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Дополнительное";
+            this.gBAddition.Controls.Add(this.button1);
+            this.gBAddition.Controls.Add(this.groupBox4);
+            this.gBAddition.Controls.Add(this.label1);
+            this.gBAddition.Controls.Add(this.button11);
+            this.gBAddition.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.gBAddition.Location = new System.Drawing.Point(494, 88);
+            this.gBAddition.Name = "gBAddition";
+            this.gBAddition.Size = new System.Drawing.Size(353, 264);
+            this.gBAddition.TabIndex = 24;
+            this.gBAddition.TabStop = false;
+            this.gBAddition.Text = "Дополнительное";
             // 
             // button1
             // 
@@ -333,7 +333,6 @@
             this.button1.TabIndex = 21;
             this.button1.Text = "Извлечь квадратный корень";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // groupBox4
             // 
@@ -379,7 +378,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(886, 402);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gBAddition);
             this.Controls.Add(this.gBInputForm);
             this.Controls.Add(this.lExSpeed);
             this.Controls.Add(this.gBResult);
@@ -392,8 +391,8 @@
             this.groupBoxSecNum.PerformLayout();
             this.gBInputForm.ResumeLayout(false);
             this.gBInputForm.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gBAddition.ResumeLayout(false);
+            this.gBAddition.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
@@ -425,7 +424,7 @@
         private Label lExSpeed;
         private GroupBox gBInputForm;
         private RichTextBox tResult;
-        private GroupBox groupBox1;
+        private GroupBox gBAddition;
         private GroupBox groupBox4;
         private TextBox more;
         private Label label1;
