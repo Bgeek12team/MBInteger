@@ -187,9 +187,9 @@ namespace MyBigIntegerForm
                 returnNormalSizeForm();
             }
             lExSpeed.Text = "Время выполнения операции:";
-            if (!long.TryParse(more.Text, out long p))
+            if (!MyBigInteger.IsNumber(more.Text))
             {
-                MessageBox.Show("Введено не число!", "Ошибка");
+                MessageBox.Show("Введено не число!", "Ошибка.");
                 return;
             }
             var n1 = new MyBigInteger(more.Text);
@@ -221,10 +221,11 @@ namespace MyBigIntegerForm
                 MessageBox.Show("Заполните все поля!");
                 returnNormalSizeForm();
             }
+            
             lExSpeed.Text = "Время выполнения операции:";
-            if (!long.TryParse(more.Text, out long p))
+            if (!MyBigInteger.IsNumber(more.Text))
             {
-                MessageBox.Show("Введено не число!", "Ошибка");
+                MessageBox.Show("Введено не число!", "Ошибка.");
                 return;
             }
             var n1 = new MyBigInteger(more.Text);

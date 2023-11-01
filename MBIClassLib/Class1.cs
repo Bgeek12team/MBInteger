@@ -1216,7 +1216,7 @@ namespace MBIClassLib
         /// </summary>
         /// <param name="str"> Проверяемая строка </param>
         /// <returns></returns>
-        private static bool IsNumber(string str)
+        public static bool IsNumber(string str)
         {
             if (!Char.IsDigit(str[0]) && str[0] != '-')
                 return false;
