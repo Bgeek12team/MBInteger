@@ -199,7 +199,7 @@ namespace MyBigIntegerForm
                 return;
             }
             string result = "";
-            getExcutionTime(() =>
+                getExcutionTime(() =>
             {
                 (MyBigInteger[] dividers, MyBigInteger[] powers) = MyBigInteger.Factorize(n1);
                 for (int i = 0; i < dividers.Length; i++)
