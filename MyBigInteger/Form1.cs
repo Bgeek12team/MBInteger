@@ -258,5 +258,9 @@ namespace MyBigIntegerForm
             lExSpeed.Location = new Point(sizeLExSpeed.Item1, sizeLExSpeed.Item2);
         }
 
+        private void gBInputForm_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
