@@ -295,82 +295,38 @@ namespace MBIClassLib
         /// </summary>
         /// <param name="second">Делитель в формате MyBigInteger</param>
         /// <returns>Частное текущего числа и делителя</returns>
-        private MyBigInteger Divide(MyBigInteger second)
+        private MyBigInteger divide(MyBigInteger divider)
         {
-            if (second == 1)
-                return this;
+            bool isNegative = false;
+            string remainder = "";
             string result = "";
-            string value1 = this.value;
-            string value2 = second.value;
-            string str;
-            BigInteger remains = 0;
-            bool flag = true;
-            if (value1[0] == '-' && value2[0] == '-')
-            {
-                value1 = value1.Remove(0, 1);
-                value2 = value2.Remove(0, 1);
-                flag = true;
-            }
-            else if (value1[0] == '-')
-            {
-                value1 = value1.Remove(0, 1);
-                flag = false;
-            }
-            else if (value2[0] == '-')
-            {
-                value2 = value2.Remove(0, 1);
-                flag = false;
-            }
-            MyBigInteger res = new MyBigInteger();
-            if (value2.Length > value1.Length || value2.Length == 0)
-                return new();
-            for (int i = 1; i <= value1.Length; i++)
-            {
-                if (BigInteger.Parse(value1.Substring(0, i)) >= BigInteger.Parse(value2) && remains == 0)
-                {
-                    if (BigInteger.Divide(BigInteger.Parse(value1), BigInteger.Parse(value2)) > 0)
-                    {
-                        if (result == "")
-                        {
-                            result += BigInteger.Divide(BigInteger.Parse(value1.Substring(0, i)), BigInteger.Parse(value2));
-                            BigInteger t = BigInteger.Divide(BigInteger.Parse(value1.Substring(0, i)), BigInteger.Parse(value2));
-                            remains = (t * (BigInteger.Parse(value2)));
-                            remains = BigInteger.Parse(value1.Substring(0, i)) - remains;
-                        }
-                        else if (remains == 0 && BigInteger.Divide(BigInteger.Parse(value1.Substring(i - 1, 1)), BigInteger.Parse(value2)) > 0)
-                        {
-                            remains += BigInteger.Parse(value1.Substring(i - 1, 1));
-                            result += BigInteger.Divide(remains, BigInteger.Parse(value2));
-                            remains -= BigInteger.Parse(value2) * BigInteger.Divide(remains, BigInteger.Parse(value2));
-                            continue;
-                        }
-                        else
-                        {
-                            result += "0";
-                            remains += BigInteger.Parse(value1.Substring(i - 1, 1));
+            if (divider.IsNeg == true && IsNeg == true)
+                isNegative = false;
+            else if (divider.IsNeg == true)
+                isNegative = true;
+            else if (IsNeg == true)
+                isNegative = true;
 
-                        }
-                    }
-                }
-                else if (remains != 0)
+            foreach (char digit in value.ToString())
+            {
+                remainder += digit;
+                var MBIremainder = new MyBigInteger(remainder);
+                int num = 0;
+                divider.IsNeg = false;
+                while (MBIremainder >= divider)
                 {
-                    str = remains.ToString() + BigInteger.Parse(value1.Substring(i - 1, 1));
-                    if (BigInteger.Divide(BigInteger.Parse(str), BigInteger.Parse(value2)) < 1)
-                    {
-                        remains = BigInteger.Parse(str);
-                        result += "0";
-                        continue;
-                    }
-                    result += BigInteger.Divide(BigInteger.Parse(str), BigInteger.Parse(value2));
-                    BigInteger t = BigInteger.Divide(BigInteger.Parse(str), BigInteger.Parse(value2));
-                    remains = (t * (BigInteger.Parse(value2)));
-                    remains = BigInteger.Parse(str) - remains;
+                    MBIremainder = MBIremainder - divider;
+                    num++;
+                    if (MBIremainder >= divider && MBIremainder == 0)
+                        remainder = "";
+                    else { remainder = MBIremainder.value; }
                 }
+                result += num.ToString();
             }
-            if (!flag)
-                result = result.Insert(0, "-");
-            res.value = result;
-            return res;
+            result = result.TrimStart('0');
+            var quotient = new MyBigInteger(result);
+            quotient.IsNeg = isNegative;
+            return quotient;
         }
         /// <summary>
         /// Метод, позволяющий взять остаток от деления 
@@ -644,8 +600,9 @@ namespace MBIClassLib
         /// <returns>Результат деления двух чисел</returns>
         private MyBigInteger Divide(long second)
         {
-            return this.Divide(new MyBigInteger(second));
+            return this.divide(new MyBigInteger(second));
         }
+
         /// <summary>
         /// Метод, позволяющий находить остаток от деления числа типа MyBigInteger и Long
         /// </summary>
@@ -702,7 +659,7 @@ namespace MBIClassLib
         /// <returns>Результат деления</returns>
         public static MyBigInteger operator /(MyBigInteger first, MyBigInteger Second)
         {
-            return first.Divide(Second);
+            return first.divide(Second);
         }
         /// <summary>
         /// Оператор нахождения остатка от деления двух чисел типа MyBigInteger
@@ -812,7 +769,7 @@ namespace MBIClassLib
         public static MyBigInteger operator /(long first, MyBigInteger second)
         {
             MyBigInteger num = new MyBigInteger(first);
-            return num.Divide(second);
+            return num.divide(second);
         }
 
         /// <summary>
@@ -1075,14 +1032,6 @@ namespace MBIClassLib
         public static explicit operator long(MyBigInteger n)
         {
             return long.Parse(n.ToString());
-        }
-        /// <summary>
-        /// Преобразует число типа MyBigInteger в число типа int
-        /// </summary>
-        /// <param name="n">преобразуемое число</param>
-        public static explicit operator ulong(MyBigInteger n)
-        {
-            return ulong.Parse(n.ToString());
         }
         /// <summary>
         /// Метод, который проверяет является ли введенная строка нулём
