@@ -197,7 +197,7 @@ namespace MyBigIntegerForm
             var n1 = new MyBigInteger(more.Text);
             if (n1 < 0)
             {
-                MessageBox.Show("Слишком большое число!", "Ошибка.");
+                MessageBox.Show("Число должно быть положительным!", "Ошибка.");
                 return;
             }
             string result = "";
