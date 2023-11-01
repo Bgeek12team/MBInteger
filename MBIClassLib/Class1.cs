@@ -356,7 +356,7 @@ namespace MBIClassLib
                 return 1 / (this.Pow(new MyBigInteger(power.GetValue(), "pos")));
             }
             if (power == 0)
-                return this;
+                return new(1);
             Stack<bool> order = new Stack<bool>();
             while (power.value != "1")
             {
