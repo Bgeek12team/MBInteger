@@ -187,7 +187,17 @@ namespace MyBigIntegerForm
                 returnNormalSizeForm();
             }
             lExSpeed.Text = "Время выполнения операции:";
+            if (!long.TryParse(more.Text, out long p))
+            {
+                MessageBox.Show("Введено не число!", "Ошибка");
+                return;
+            }
             var n1 = new MyBigInteger(more.Text);
+            if (n1 < 0)
+            {
+                MessageBox.Show("Слишком большое число!", "Ошибка.");
+                return;
+            }
             string result = "";
             getExcutionTime(() =>
             {
@@ -212,7 +222,22 @@ namespace MyBigIntegerForm
                 returnNormalSizeForm();
             }
             lExSpeed.Text = "Время выполнения операции:";
+            if (!long.TryParse(more.Text, out long p))
+            {
+                MessageBox.Show("Введено не число!", "Ошибка");
+                return;
+            }
             var n1 = new MyBigInteger(more.Text);
+            if (n1 < 0)
+            {
+                MessageBox.Show("Число под корнем должно быть положительным!", "Ошибка.");
+                return;
+            }
+            if (n1 > new MyBigInteger(long.MaxValue))
+            {
+                MessageBox.Show("Слишком большое число!", "Ошибка.");
+                return;
+            }
             string result = "0";
             getExcutionTime(() =>
                 { 
