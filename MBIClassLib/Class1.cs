@@ -440,7 +440,7 @@ namespace MBIClassLib
 
             int k = 0;
             long i;
-            for (MyBigInteger end = new(2); end < n; end+=1000)
+            for (MyBigInteger end = new(0); end < n; end+=1000)
             {
                 i = 0;
                 primes = AllPrimes(end, end + 1000);
