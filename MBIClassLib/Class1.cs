@@ -513,7 +513,7 @@ namespace MBIClassLib
         /// <returns>Массив простых чисел на отрезке [d; n]</returns>
         private static MyBigInteger[] AllPrimes(MyBigInteger start, MyBigInteger end)
         {
-            const int buffer = 100; //размер сегмента в алгоритме
+            const int buffer = 10000; //размер сегмента в алгоритме
             List<MyBigInteger> primesList = new List<MyBigInteger>();
             if (start <= 2)
             {
