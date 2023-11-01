@@ -120,7 +120,7 @@ namespace MBIClassLib
 
             }
 
-            long buf = 10;
+            int buf = 5;
             StringBuilder result = new StringBuilder("");
             string n = this.value;
             string m = second.value;
@@ -141,12 +141,12 @@ namespace MBIClassLib
             long carry = 0;
             for (long i = n.Length; i > 0; i -= buf)
             {
-                long temp = long.Parse(n.Substring((int)(i - buf), (int)buf)) 
-                    + long.Parse(m.Substring((int)(i - buf), (int)buf)) + carry;
-                carry = temp / buf;
-                result.Append(temp.ToString());
+                int temp = int.Parse(n.Substring(i - buf, buf)) + int.Parse(m.Substring(i - buf, buf)) + carry;
+                carry = temp / (int) Math.Pow(10, buf);
+                string append = temp.ToString().PadLeft(buf, '0');
+                result.Append(Reverse(append.Substring(append.Length - buf, buf)));
             }
-            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(result.ToString()));
+            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(Reverse(result.ToString())));
             return res;
         }
         /// <summary>
@@ -253,19 +253,20 @@ namespace MBIClassLib
             {
                 int n1 = int.Parse(n.Substring(i - buf, buf));
                 int n2 = int.Parse(m.Substring(i - buf, buf));
-                if (n2 > n1)
+                if (n2 > n1 + borrow)
                 {
-                    temp = (int)Math.Pow(10, buf) + n1 - n2;
+                    temp = (int)Math.Pow(10, buf) + n1 - n2 - borrow;
                     borrow = 1;
                 }
                 else
                 {
-                    temp = n1 - n2;
+                    temp = n1 - n2 - borrow;
                     borrow = 0;
                 }
-                result.Append(temp.ToString());
+                string append = temp.ToString().PadLeft(buf, '0');
+                result.Append(Reverse(append.Substring(append.Length - buf, buf)));
             }
-            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(result.ToString()));
+            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(Reverse(result.ToString())));
             if (f) return res * -1; else return res;
         }
         /// <summary>
