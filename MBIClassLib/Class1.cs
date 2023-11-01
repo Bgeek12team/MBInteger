@@ -355,6 +355,8 @@ namespace MBIClassLib
             {
                 return 1 / (this.Pow(new MyBigInteger(power.GetValue(), "pos")));
             }
+            if (power == 0)
+                return new(1);
             Stack<bool> order = new Stack<bool>();
             while (power.value != "1")
             {
@@ -397,6 +399,7 @@ namespace MBIClassLib
         /// к подкоренному числу</returns>
         public static MyBigInteger Sqrt(MyBigInteger x1)
         {
+            
             int width;
             long result;
             long x = (long)x1;
