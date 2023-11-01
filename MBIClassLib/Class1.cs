@@ -5,6 +5,14 @@ using System.Text;
 
 namespace MBIClassLib
 {
+
+    public static class SBEXT
+    {
+        public static void Prepend(this StringBuilder sb, string s)
+        {
+            sb.Insert(0, s);
+        }
+    }
     /// <summary>
     /// Класс, позволяющий осуществлять работу с большими числами,
     /// которые представляются в памяти в виде строк
@@ -113,7 +121,7 @@ namespace MBIClassLib
                 if (second.IsNegative())
                 {
                     MyBigInteger mbi = new MyBigInteger(this.value, "pos").Add(new MyBigInteger(second.value, "pos"));
-                    return new MyBigInteger(mbi.GetValue(), "neg");
+                    return new MyBigInteger(mbi.value, "neg");
                 }
                 else
                     return second.Sub(new MyBigInteger(this.value, "pos"));
@@ -128,27 +136,28 @@ namespace MBIClassLib
             {
                 if (m.Length > n.Length)
                 {
-                    n = n.PadLeft(m.Length - n.Length + n.Length, '0');
+                    n = n.PadLeft(m.Length, '0');
                 }
                 else
-                    m = m.PadLeft(n.Length - m.Length + m.Length, '0');
+                    m = m.PadLeft(n.Length, '0');
             }
             while (n.Length % buf != 0)
             {
                 n = "0" + n;
                 m = "0" + m;
             }
-            long carry = 0;
-            for (long i = n.Length; i > 0; i -= buf)
+            int carry = 0;
+            for (int i = n.Length; i > 0; i -= buf)
             {
                 int temp = int.Parse(n.Substring(i - buf, buf)) + int.Parse(m.Substring(i - buf, buf)) + carry;
                 carry = temp / (int) Math.Pow(10, buf);
                 string append = temp.ToString().PadLeft(buf, '0');
-                result.Append(Reverse(append.Substring(append.Length - buf, buf)));
+                result.Prepend(append.Substring(append.Length - buf, buf));
             }
-            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(Reverse(result.ToString())));
+            MyBigInteger res = new MyBigInteger(result.ToString());
             return res;
         }
+
         /// <summary>
         /// Метод, позволяющий осуществлять умножение текущего числа
         /// на множитель в формате MyBigInteger
@@ -213,8 +222,6 @@ namespace MBIClassLib
             bool f = false;
             string n;
             string m;
-
-
             if (this > second)
             {
                 n = this.value;
@@ -222,7 +229,7 @@ namespace MBIClassLib
             }
             else if (this == second)
             {
-                return new MyBigInteger("0");
+                return new MyBigInteger("0", "pos");
             }
             else
             {
@@ -237,18 +244,18 @@ namespace MBIClassLib
             {
                 if (m.Length > n.Length)
                 {
-                    n = n.PadLeft(m.Length - n.Length + n.Length, '0');
+                    n = n.PadLeft(m.Length, '0');
                 }
                 else
-                    m = m.PadLeft(n.Length - m.Length + m.Length, '0');
+                    m = m.PadLeft(n.Length, '0');
             }
             while (n.Length % buf != 0)
             {
                 n = "0" + n;
                 m = "0" + m;
             }
-            int borrow = 0;
-            int temp = 0;
+            sbyte borrow = 0;
+            int temp;
             for (int i = n.Length; i > 0; i -= buf)
             {
                 int n1 = int.Parse(n.Substring(i - buf, buf));
@@ -264,10 +271,12 @@ namespace MBIClassLib
                     borrow = 0;
                 }
                 string append = temp.ToString().PadLeft(buf, '0');
-                result.Append(Reverse(append.Substring(append.Length - buf, buf)));
+                result.Prepend(append.Substring(append.Length - buf, buf));
             }
-            MyBigInteger res = new MyBigInteger(MyBigInteger.TrimLeftZeros(Reverse(result.ToString())));
-            if (f) return res * -1; else return res;
+            if (f) 
+                return new MyBigInteger(TrimLeftZeros(result.ToString()), "neg"); 
+            else 
+                return new MyBigInteger(TrimLeftZeros(result.ToString()), "pos");
         }
         /// <summary>
         /// Метод, позволяющий делить текущее число на
