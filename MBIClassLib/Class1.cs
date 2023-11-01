@@ -473,13 +473,29 @@ namespace MBIClassLib
         /// </returns>
         public static (MyBigInteger[], MyBigInteger[]) Factorize(MyBigInteger n)
         {
-
             List<MyBigInteger> dividers = new List<MyBigInteger>();
             List<MyBigInteger> powers = new List<MyBigInteger>();
-            MyBigInteger[] primes = AllPrimes(new MyBigInteger("2"), n);
+            MyBigInteger[] primes = AllPrimes(new MyBigInteger("2", "pos"), new(100));
             long i = 0;
             int k = 0;
-            while (n > 1)
+            while (n > 1 && i < primes.Length)
+            {
+                if (n % primes[i] == 0)
+                {
+                    dividers.Add(primes[i]);
+                    powers.Add(new MyBigInteger(0));
+                    while (n % primes[i] == 0)
+                    {
+                        powers[k]++;
+                        n /= primes[i];
+                    }
+                    k++;
+                }
+                i++;
+            }
+            primes = AllPrimes(new MyBigInteger("2", "pos"), n);
+            i = 0;
+            while (n > 1 && i < primes.Length)
             {
                 if (n % primes[i] == 0)
                 {
@@ -513,7 +529,7 @@ namespace MBIClassLib
         /// <returns>Массив простых чисел на отрезке [d; n]</returns>
         private static MyBigInteger[] AllPrimes(MyBigInteger start, MyBigInteger end)
         {
-            const int buffer = 10000; //размер сегмента в алгоритме
+            const int buffer = 20000; //размер сегмента в алгоритме
             List<MyBigInteger> primesList = new List<MyBigInteger>();
             if (start <= 2)
             {
