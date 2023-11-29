@@ -141,6 +141,11 @@ namespace MyBigIntegerForm
                                 result = (n1 <= n2).ToString();
                             });
                             break;
+                        case "*К":
+                            getExcutionTime(() => {
+                                result = n1.multiplyK(n2).ToString(); 
+                            });
+                            break;
                         case "^":
                             getExcutionTime(() => {
                                 result = (n1 ^ n2).ToString();
@@ -291,6 +296,12 @@ namespace MyBigIntegerForm
         private void gBInputForm_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            lOper.Text = "*К";
+            groupBoxSecNum.Text = "Второе число";
         }
     }
 }

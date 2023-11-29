@@ -56,6 +56,7 @@
             this.more = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.gBResult.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBoxSecNum.SuspendLayout();
@@ -176,7 +177,7 @@
             this.bMult.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.bMult.Location = new System.Drawing.Point(348, 143);
             this.bMult.Name = "bMult";
-            this.bMult.Size = new System.Drawing.Size(100, 30);
+            this.bMult.Size = new System.Drawing.Size(45, 30);
             this.bMult.TabIndex = 13;
             this.bMult.Text = "*";
             this.bMult.UseVisualStyleBackColor = true;
@@ -286,6 +287,7 @@
             // 
             // gBInputForm
             // 
+            this.gBInputForm.Controls.Add(this.button2);
             this.gBInputForm.Controls.Add(this.groupBoxSecNum);
             this.gBInputForm.Controls.Add(this.groupBox2);
             this.gBInputForm.Controls.Add(this.lOper);
@@ -375,6 +377,17 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Times New Roman", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.button2.Location = new System.Drawing.Point(399, 143);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(49, 30);
+            this.button2.TabIndex = 22;
+            this.button2.Text = "*К";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // mbiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -432,5 +445,6 @@
         private Label label1;
         private Button button11;
         private Button button1;
+        private Button button2;
     }
 }

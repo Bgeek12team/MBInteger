@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using System.Numerics;
-using System.Text;
+﻿using System.Text;
 
 namespace MBIClassLib
 {
@@ -632,6 +629,10 @@ namespace MBIClassLib
         {
             return this.Pow(new MyBigInteger(second));
         }
+        public MyBigInteger multiplyK(MyBigInteger second)
+        {
+            return this.multiply(second);
+        }
         /// <summary>
         /// Оператор сложения двух чисел типа MyBigInteger
         /// </summary>
@@ -758,7 +759,7 @@ namespace MBIClassLib
             MyBigInteger num = new MyBigInteger(first);
             return num.Sub(second);
         }
-
+        
         /// <summary>
         /// Перегрузка оператора умножения (*) для типа long и объекта MyBigInteger
         /// </summary>
@@ -1271,4 +1272,5 @@ namespace MBIClassLib
             return new string(chars);
         }
     }
+
 }
